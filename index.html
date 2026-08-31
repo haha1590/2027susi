@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3학년 대입 지원 상담</title>
+<style>
+  :root{
+    --ink:#3a2c4a;
+    --ink-soft:#7a6a8a;
+    --line:#ecdff0;
+    --bg:#fff6fb;
+    --card:#ffffff;
+    --accent:#ff5c8a;
+    --accent2:#8b5cf6;
+    --accent-soft:#ffe7f0;
+    --gold:#f5a524;
+    --safe:#1a9c6b;
+    --safe-bg:#e3faf0;
+    --fit:#7c3aed;
+    --fit-bg:#f1e8ff;
+    --reach:#ef7f2b;
+    --reach-bg:#fff1e2;
+    --none:#9a8ba8;
+    --none-bg:#f4eef8;
+    --radius:20px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",Roboto,sans-serif;
+    background:
+      radial-gradient(circle at 8% 0%, #ffe1ee 0%, transparent 45%),
+      radial-gradient(circle at 95% 15%, #e6e0ff 0%, transparent 40%),
+      var(--bg);
+    color:var(--ink);
+    line-height:1.55;
+    padding-bottom:60px;
+  }
+  header.top{
+    background:linear-gradient(120deg, #6a4c93 0%, #ff5c8a 65%, #ff9a6b 100%);
+    color:#fff;
+    padding:20px 20px 18px;
+    position:sticky; top:0; z-index:50;
+    box-shadow:0 4px 16px rgba(139,92,246,0.25);
+  }
+  header.top h1{
+    margin:0 0 2px;
+    font-size:19px;
+    font-weight:800;
+    letter-spacing:-0.2px;
+  }
+  header.top p{
+    margin:0 0 12px;
+    font-size:12.5px;
+    color:#ffe4f0;
+  }
+  .switch{
+    display:flex;
+    background:rgba(255,255,255,0.18);
+    border-radius:999px;
+    padding:3px;
+    width:fit-content;
+  }
+  .switch button{
+    border:none;
+    background:transparent;
+    color:#cdd9e5;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:13.5px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .switch button.active{
+    background:#fff;
+    color:var(--ink);
+  }
+  main{max-width:900px; margin:0 auto; padding:18px 14px;}
+  .view{display:none;}
+  .view.active{display:block;}
+  .card{
+    background:linear-gradient(180deg, #ffffff 0%, #fffbfe 100%);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 18px;
+    margin-bottom:16px;
+    box-shadow:0 3px 14px rgba(139,92,246,0.06);
+  }
+  .card h2{
+    margin:0 0 4px;
+    font-size:16px;
+    font-weight:800;
+  }
+  .card .desc{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  label{
+    display:block;
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--ink-soft);
+    margin-bottom:5px;
+  }
+  input[type=text], input[type=number], input[type=password], select, textarea{
+    width:100%;
+    padding:10px 11px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    font-size:14px;
+    background:#fffbfd;
+    color:var(--ink);
+    font-family:inherit;
+  }
+  input:focus, select:focus, textarea:focus{
+    outline:2px solid var(--accent);
+    outline-offset:1px;
+    background:#fff;
+  }
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .row3{display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:8px;}
+  @media(min-width:560px){
+    .row3{grid-template-columns:1.3fr 1fr 1fr;}
+  }
+  .field{margin-bottom:12px;}
+  .btn{
+    display:inline-block;
+    border:none;
+    background:linear-gradient(120deg, var(--accent) 0%, var(--accent2) 100%);
+    color:#fff;
+    font-weight:800;
+    font-size:13.5px;
+    padding:12px 20px;
+    border-radius:999px;
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(255,92,138,0.28);
+  }
+  .btn.secondary{background:linear-gradient(120deg, #7a6a8a, #9a8ba8); box-shadow:none;}
+  .btn.ghost{background:transparent; color:var(--accent); border:1.5px solid var(--accent); font-weight:700; padding:7px 14px; font-size:12.5px; box-shadow:none;}
+  .btn.danger{background:linear-gradient(120deg, #ef7f2b, #e0542a); box-shadow:none;}
+  .btn.block{width:100%; text-align:center; padding:14px; font-size:14.5px;}
+  .btn:disabled{opacity:0.5; cursor:not-allowed;}
+  .apply-block{border-top:1px dashed var(--line); padding-top:14px; margin-top:14px;}
+  .apply-block h3{font-size:14px; margin:0 0 3px;}
+  .apply-block .limit{font-size:12px; color:var(--ink-soft); margin:0 0 10px;}
+  .apply-row{
+    display:grid;
+    grid-template-columns:24px 1fr;
+    gap:8px;
+    align-items:start;
+    margin-bottom:8px;
+  }
+  .apply-row .num{
+    font-size:12px;
+    font-weight:800;
+    color:#fff;
+    background:var(--accent);
+    width:22px; height:22px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    margin-top:8px;
+  }
+  .apply-row.jc .num{background:var(--gold);}
+  .apply-row .inputs{display:grid; grid-template-columns:1fr; gap:6px;}
+  @media(min-width:560px){
+    .apply-row .inputs{grid-template-columns:1.4fr 1fr 1fr;}
+  }
+  .apply-row .inputs .full{grid-column:1 / -1;}
+  .apply-row input{font-size:13.5px; padding:8px 9px;}
+  .result-field{display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+  .result-field select{
+    width:auto; min-width:118px; font-size:13px; padding:7px 8px;
+    background:var(--accent-soft); border-color:#c3d4e5; font-weight:700; color:var(--accent);
+  }
+  .result-field .f-note{width:180px; font-size:13px; padding:7px 8px;}
+  .result-field .f-grade{width:100px; font-size:13px; padding:7px 8px;}
+  .result-field .f-lastcut{width:130px; font-size:13px; padding:7px 8px;}
+  .result-field .f-suneung{width:auto; min-width:118px; font-size:13px; padding:7px 8px; background:var(--accent-soft); border-color:#e6c7f5; font-weight:700; color:var(--accent2);}
+  .result-field .f-suneungcond{width:220px; font-size:13px; padding:7px 8px;}
+  .result-field .f-enroll{width:auto; min-width:118px; font-size:13px; padding:7px 8px; background:var(--safe-bg); border-color:#bfe3d1; font-weight:700; color:var(--safe);}
+  .calc-row{
+    display:grid; grid-template-columns:1.6fr 0.8fr 0.8fr auto; gap:6px;
+    margin-bottom:7px; align-items:center;
+  }
+  .calc-row input{font-size:13.5px; padding:8px 9px;}
+  .calc-remove{
+    border:none; background:var(--reach-bg); color:var(--reach);
+    width:28px; height:28px; border-radius:8px; font-size:13px; cursor:pointer; font-weight:800;
+  }
+  .calc-result{
+    display:flex; align-items:center; gap:10px; margin-top:12px;
+    padding:10px 12px; background:var(--accent-soft); border-radius:9px;
+  }
+  .calc-result span{font-size:13px; color:var(--ink-soft); font-weight:700;}
+  .calc-result strong{font-size:20px; color:var(--accent);}
+  .msg-inline{font-size:12.5px; color:var(--ink-soft); margin-top:6px;}
+  .msg{
+    font-size:13px;
+    padding:10px 12px;
+    border-radius:9px;
+    margin-top:10px;
+  }
+  .msg.ok{background:var(--safe-bg); color:var(--safe);}
+  .msg.err{background:var(--reach-bg); color:var(--reach);}
+  .toolbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+  .login-box{max-width:320px; margin:40px auto;}
+  .roster-list{
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow-y:auto;
+    max-height:400px;
+    background:#fff;
+  }
+  .roster-item{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:14px 16px;
+    border:none;
+    border-bottom:1px solid var(--line);
+    background:#fff;
+    font-size:15px;
+    font-weight:700;
+    color:var(--ink);
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+  }
+  .roster-item:last-child{border-bottom:none;}
+  .roster-item.active{background:var(--accent-soft); color:var(--accent);}
+  .roster-item .ri-radio{
+    width:22px; height:22px; min-width:22px; border-radius:50%;
+    border:2px solid var(--line); background:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:12px;
+  }
+  .roster-item.active .ri-radio{
+    border-color:var(--accent);
+    background:linear-gradient(120deg, var(--accent), var(--accent2));
+  }
+  .roster-item.active .ri-radio::after{content:"✓"; color:#fff; font-weight:900;}
+  .type-toggle{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .type-btn{
+    display:flex; flex-direction:column; align-items:flex-start; gap:5px;
+    border:2px solid var(--line); background:#fffbfd; border-radius:16px;
+    padding:16px 14px; cursor:pointer; font-family:inherit;
+  }
+  .type-btn .type-icon{font-size:22px;}
+  .type-btn .type-label{font-size:14.5px; font-weight:800; color:var(--ink);}
+  .type-btn .type-count{font-size:12px; color:var(--ink-soft); font-weight:600;}
+  .type-btn.active{border-color:var(--accent); background:var(--accent-soft); box-shadow:0 3px 10px rgba(255,92,138,0.15);}
+  .type-btn.active .type-label{color:var(--accent);}
+  .tabbar{display:flex; gap:6px; margin-bottom:14px;}
+  .tabbar button{
+    flex:1;
+    border:1px solid var(--line);
+    background:#fff;
+    padding:10px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:13px;
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .tabbar button.active{
+    background:linear-gradient(120deg, var(--accent), var(--accent2));
+    color:#fff;
+    border-color:transparent;
+  }
+  .teach-view{display:none;}
+  .teach-view.active{display:block;}
+  select#studentSelect{margin-bottom:14px;}
+  .summary-badges{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 4px;}
+  .sbadge{
+    font-size:12px; font-weight:800; padding:5px 10px; border-radius:999px;
+  }
+  .sbadge.safe{background:var(--safe-bg); color:var(--safe);}
+  .sbadge.fit{background:var(--fit-bg); color:var(--fit);}
+  .sbadge.reach{background:var(--reach-bg); color:var(--reach);}
+  .grade-pill{
+    display:inline-block; background:var(--accent-soft); color:var(--accent);
+    font-weight:800; font-size:12.5px; padding:3px 10px; border-radius:999px;
+  }
+  table{width:100%; border-collapse:collapse; font-size:12.8px;}
+  th, td{
+    text-align:left; padding:8px 7px; border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  th{color:var(--ink-soft); font-size:11.5px; font-weight:800; white-space:nowrap;}
+  .app-table-wrap{overflow-x:auto; margin-top:6px;}
+  .badge{
+    display:inline-block; padding:3px 9px; border-radius:999px; font-size:11.5px; font-weight:800; white-space:nowrap;
+  }
+  .badge.safe{background:var(--safe-bg); color:var(--safe);}
+  .badge.fit{background:var(--fit-bg); color:var(--fit);}
+  .badge.reach{background:var(--reach-bg); color:var(--reach);}
+  .badge.none{background:var(--none-bg); color:var(--none);}
+  .gauge{
+    position:relative; width:120px; height:8px; background:#e4e8ec; border-radius:99px; margin-top:4px;
+  }
+  .gauge .mark{
+    position:absolute; top:-3px; width:3px; height:14px; background:var(--ink); border-radius:2px;
+  }
+  .point{font-size:12px; color:var(--ink-soft); margin-top:3px; max-width:220px;}
+  .section-title{
+    font-size:13px; font-weight:800; color:var(--accent); margin:18px 0 4px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .cutoff-table td, .cutoff-table th{font-size:12.5px;}
+  .cutoff-form{display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:14px;}
+  @media(min-width:700px){
+    .cutoff-form{grid-template-columns:0.8fr 1.4fr 1fr 1.2fr 0.7fr 0.8fr 1fr auto;}
+  }
+  .small-btn{padding:5px 9px; font-size:11.5px; border-radius:7px;}
+  .empty{color:var(--ink-soft); font-size:13px; padding:20px; text-align:center;}
+  .config-warning{
+    background:#fbe9dd; color:#8a3c1c; font-size:12.5px; padding:10px 12px; border-radius:9px; margin-bottom:14px;
+  }
+  .hero-banner{
+    background:linear-gradient(120deg, #ffe1ee, #eee1ff);
+    color:#7c3aed;
+    font-weight:800;
+    font-size:13.5px;
+    text-align:center;
+    padding:14px 16px;
+    border-radius:16px;
+    margin-bottom:16px;
+    box-shadow:0 3px 10px rgba(139,92,246,0.1);
+  }
+  #printArea{ display:none; }
+  .print-page{ margin-bottom:26px; }
+  .print-page h2{ font-size:16px; margin:0 0 2px; }
+  .print-page h3{ font-size:13.5px; margin:14px 0 4px; }
+  .print-meta{ color:#666; font-size:11.5px; margin:0 0 10px; }
+  .print-table{ width:100%; border-collapse:collapse; font-size:10.5px; margin-bottom:10px; }
+  .print-table th, .print-table td{ border:1px solid #999; padding:4px 5px; text-align:left; vertical-align:top; }
+  .print-table th{ background:#f0f0f0; }
+  .print-memo{ white-space:pre-wrap; border:1px solid #ccc; padding:8px 10px; border-radius:6px; min-height:36px; font-size:11.5px; }
+  @media print{
+    body *{ visibility:hidden; }
+    #printArea, #printArea *{ visibility:visible; }
+    #printArea{ display:block; position:absolute; left:0; top:0; width:100%; padding:6px; }
+    .print-page{ page-break-after:always; }
+    .print-page:last-child{ page-break-after:auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>🌸 3학년 대입 지원 상담 🎓</h1>
+  <p>✨ 희망 대학·전형·학과를 입력하고 합격의 꿈에 한 걸음 더 가까워져요 ✨</p>
+  <div class="switch">
+    <button id="btnGoStudent" class="active" onclick="switchView('student')">🙋‍♀️ 학생 화면</button>
+    <button id="btnGoTeacher" onclick="switchView('teacher')">👩‍🏫 교사 화면</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= 학생 화면 ================= -->
+<div id="view-student" class="view active">
+
+  <div id="gasWarning" class="config-warning" style="display:none;">
+    ⚠ GAS_URL이 설정되지 않았습니다. index.html 상단 스크립트의 GAS_URL 값을 배포된 Apps Script 웹앱 주소로 바꿔주세요.
+  </div>
+
+  <div class="hero-banner">🍀 정성껏 입력할수록, 꿈꾸던 대학에 더 가까워져요! 오늘도 화이팅 💪</div>
+
+  <div class="card">
+    <h2>🧮 내신 등급 계산기</h2>
+    <p class="desc">학교마다 반영 과목·학기 기준이 다릅니다. 지원할 학교의 전형기준에 맞는 과목만 넣어 계산한 뒤, 아래 지원 입력란의 <b>지원 등급</b>에 그 학교 결과값을 각각 넣어주세요.</p>
+    <div id="calcRows"></div>
+    <button type="button" class="btn ghost" onclick="addCalcRow()">➕ 과목 추가</button>
+    <div class="calc-result">
+      <span>✨ 평균 등급</span>
+      <strong id="calcResult">-</strong>
+      <button type="button" class="btn ghost small-btn" onclick="copyCalcResult()">결과 복사</button>
+    </div>
+    <div id="calcCopyMsg" class="msg-inline"></div>
+  </div>
+
+  <div class="card">
+    <h2>📝 학생 기본정보</h2>
+    <p class="desc">반을 먼저 선택한 뒤, 번호+이름에서 본인을 선택하면 이전에 입력한 자료를 자동으로 불러옵니다.</p>
+
+    <div class="field">
+      <label>반</label>
+      <select id="s_class" onchange="onClassChange()"></select>
+    </div>
+
+    <div id="rosterField" class="field" style="display:none;">
+      <label>번호 + 이름 선택</label>
+      <select id="rosterSelect" onchange="onRosterSelectChange()"><option value="">-- 선택 --</option></select>
+    </div>
+
+    <div id="manualEntry" style="display:none;">
+      <div class="field">
+        <label>번호 + 이름</label>
+        <input type="text" id="s_combo" placeholder="예: 15 홍길동" oninput="parseCombo()">
+      </div>
+      <input type="hidden" id="s_num">
+      <input type="hidden" id="s_name">
+    </div>
+
+    <button class="btn secondary" onclick="loadStudent()">📂 기존 자료 불러오기</button>
+    <div id="loadMsg"></div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 지원 유형 선택</h2>
+    <p class="desc">번호와 이름을 먼저 선택한 뒤, 입력할 유형을 골라주세요. 유형을 바꿔도 이전에 입력한 내용은 유지됩니다.</p>
+    <div class="type-toggle">
+      <button type="button" class="type-btn" id="typeBtn4y" onclick="selectType('4년제')">
+        <span class="type-icon">🏫</span>
+        <span class="type-label">4년제 대학</span>
+        <span class="type-count" id="count4yLabel">0/6 입력</span>
+      </button>
+      <button type="button" class="type-btn" id="typeBtnJc" onclick="selectType('전문대')">
+        <span class="type-icon">🎓</span>
+        <span class="type-label">전문대학</span>
+        <span class="type-count" id="countJcLabel">0/10 입력</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card" id="applyCard" style="display:none;">
+    <div class="apply-block" style="border-top:none; margin-top:0; padding-top:0;">
+      <h3 id="applyHeading">🏫 4년제 대학 지원</h3>
+      <p class="limit" id="applyLimit">최대 6개까지 입력 가능합니다.</p>
+      <div id="fourYearRows"></div>
+      <div id="collegeRows" style="display:none;"></div>
+    </div>
+
+    <button class="btn block" onclick="saveCurrentType()">💾 이 유형 저장하기</button>
+    <div id="saveMsg"></div>
+  </div>
+
+</div>
+
+<!-- ================= 교사 화면 ================= -->
+<div id="view-teacher" class="view">
+
+  <div id="teacherLogin" class="card login-box">
+    <h2>🔐 교사 인증</h2>
+    <p class="desc">교사 비밀번호를 입력하세요.</p>
+    <div class="field">
+      <input type="password" id="t_pw" placeholder="비밀번호">
+    </div>
+    <button class="btn block" onclick="teacherLogin()">확인</button>
+    <div id="loginMsg"></div>
+  </div>
+
+  <div id="teacherMain" style="display:none;">
+
+    <div class="tabbar">
+      <button id="tab-consult" class="active" onclick="switchTeachTab('consult')">🧑‍🎓 학생별 상담</button>
+      <button id="tab-cutoff" onclick="switchTeachTab('cutoff')">📊 입결데이터 관리</button>
+      <button id="tab-roster" onclick="switchTeachTab('roster')">📋 명렬 관리</button>
+    </div>
+
+    <!-- 학생별 상담 -->
+    <div id="teach-consult" class="teach-view active">
+      <div class="card">
+        <label>반 선택</label>
+        <select id="classFilter" onchange="onClassFilterChange()"></select>
+        <label>학생 선택</label>
+        <select id="studentSelect" onchange="renderStudentReport()"></select>
+        <div class="toolbar">
+          <button class="btn ghost" onclick="printCurrentStudent()">🖨️ 이 학생 리포트 출력</button>
+          <button class="btn ghost" onclick="printAllStudents()">🖨️ 선택 반 일괄출력</button>
+        </div>
+        <div id="studentReport"></div>
+      </div>
+    </div>
+
+    <!-- 입결데이터 관리 -->
+    <div id="teach-cutoff" class="teach-view">
+      <div class="card">
+        <h2>입결데이터 입력</h2>
+        <p class="desc">학교/전형/학과별 최근 3개년 합격선(내신등급 컷)을 등록·수정합니다.</p>
+        <div class="cutoff-form">
+          <select id="c_type"><option value="4년제">4년제</option><option value="전문대">전문대</option></select>
+          <input type="text" id="c_school" placeholder="학교명">
+          <input type="text" id="c_track" placeholder="전형명">
+          <input type="text" id="c_major" placeholder="학과">
+          <input type="number" id="c_year" placeholder="연도" min="2000" max="2100">
+          <input type="number" id="c_cut" placeholder="컷등급" step="0.01">
+          <input type="text" id="c_note" placeholder="비고(선택)">
+          <button class="btn" onclick="saveCutoff()">저장</button>
+        </div>
+        <input type="hidden" id="c_id">
+        <div id="cutoffMsg"></div>
+      </div>
+
+      <div class="card">
+        <h2>📊 자체 데이터로 입결 추정</h2>
+        <p class="desc">현재 학년도 학생들이 실제로 지원한 등급과 합격 결과(최초합격/충원합격)를 바탕으로, 학교·전형·학과별 합격선을 자동으로 추정해 입결데이터에 등록합니다. 결과가 어느 정도 쌓인 뒤(입시 결과 발표 후) 눌러주세요. 이미 수동으로 등록해둔 값(공식 배치표 등)은 덮어쓰지 않고 건너뜁니다.</p>
+        <button class="btn" onclick="estimateCutoffsFromResults()">📊 지금 추정해서 등록하기</button>
+        <div id="estimateMsg" class="msg-inline"></div>
+      </div>
+
+      <div class="card">
+        <h2>엑셀 붙여넣기로 한 번에 등록</h2>
+        <p class="desc">진학사·학교 요강 등에서 표를 복사해 아래에 붙여넣으세요. 한 줄에 한 건씩, 항목은 <b>탭(엑셀 복사) 또는 쉼표</b>로 구분합니다.<br>
+        순서: <b>유형(4년제/전문대), 학교명, 전형, 학과, 연도, 컷등급, 비고(선택)</b><br>
+        예) <code>4년제,인하대학교,학생부교과,간호학과,2025,1.8,</code></p>
+        <textarea id="bulkPaste" rows="6" placeholder="여기에 엑셀에서 복사한 표를 붙여넣으세요"></textarea>
+        <div style="margin-top:10px;">
+          <button class="btn" onclick="bulkSaveCutoff()">일괄 등록</button>
+          <span id="bulkMsg"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <input type="text" id="cutoffFilter" placeholder="학교명/학과 검색" oninput="renderCutoffTable()" style="max-width:240px;">
+        </div>
+        <div class="app-table-wrap">
+          <table class="cutoff-table">
+            <thead><tr><th>유형</th><th>학교명</th><th>전형</th><th>학과</th><th>연도</th><th>컷등급</th><th>비고</th><th></th></tr></thead>
+            <tbody id="cutoffTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 명렬 관리 -->
+    <div id="teach-roster" class="teach-view">
+      <div class="card">
+        <h2>반 명렬 관리</h2>
+        <p class="desc">학생이 목록에서 본인을 선택해 들어올 수 있도록 번호·이름을 등록합니다. 등록하면 <b>같은 반</b>의 기존 명단만 새 목록으로 교체되고, 다른 반 명단은 그대로 유지됩니다.</p>
+        <div class="field">
+          <label>반</label>
+          <input type="text" id="r_class" value="3학년 8반">
+        </div>
+        <label>번호, 이름 (한 줄에 한 명, 탭 또는 쉼표로 구분)</label>
+        <textarea id="rosterPaste" rows="8" placeholder="1,김민준&#10;2,박서연&#10;3,이도윤"></textarea>
+        <div style="margin-top:10px;">
+          <button class="btn" onclick="saveRoster()">명렬 등록 (전체 교체)</button>
+          <span id="rosterMsg"></span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>현재 명렬</h2>
+        <div class="app-table-wrap">
+          <table>
+            <thead><tr><th>번호</th><th>이름</th><th>반</th></tr></thead>
+            <tbody id="rosterTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="printArea"></div>
+
+</main>
+
+<script>
+/* ========= 설정: 배포된 Google Apps Script 웹앱 URL을 아래에 붙여넣으세요 ========= */
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbzDJkWyO9Yy4Ek4Rblq_sxICMS_U70iYxrU4SFyOiXxJUC-2FoZ2r7NvD6rdB7uby8H8A/exec';
+/* =============================================================================== */
+
+let teacherPw = null;
+let allData = null; // 교사 화면용 캐시 {students, applications, cutoffs, memos}
+let currentType = null; // 학생 화면에서 현재 선택된 지원 유형('4년제'|'전문대')
+
+function checkConfig(){
+  if(!GAS_URL || GAS_URL.indexOf('YOUR_GAS_WEB_APP_URL_HERE') >= 0){
+    document.getElementById('gasWarning').style.display = 'block';
+    return false;
+  }
+  return true;
+}
+
+async function callApi(action, payload){
+  const res = await fetch(GAS_URL, {
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({action, payload})
+  });
+  return res.json();
+}
+
+function switchView(v){
+  document.getElementById('view-student').classList.toggle('active', v==='student');
+  document.getElementById('view-teacher').classList.toggle('active', v==='teacher');
+  document.getElementById('btnGoStudent').classList.toggle('active', v==='student');
+  document.getElementById('btnGoTeacher').classList.toggle('active', v==='teacher');
+}
+
+/* ---------------- 학생 화면 ---------------- */
+function buildRow(type, idx){
+  const wrap = document.createElement('div');
+  wrap.className = 'apply-row' + (type==='전문대' ? ' jc' : '');
+  const suneungHtml = type==='4년제' ? `
+        <select class="f-suneung" onchange="toggleSuneungCond(this)">
+          <option value="">수능최저 미정</option>
+          <option value="있음">수능최저 있음</option>
+          <option value="없음">수능최저 없음</option>
+        </select>
+        <input type="text" class="f-suneungcond" placeholder="예: 국,수,영,탐(1) 중 2개 합 6" style="display:none;">` : '';
+  wrap.innerHTML = `
+    <div class="num">${idx}</div>
+    <div class="inputs">
+      <input type="text" placeholder="학교명" class="f-school">
+      <input type="text" placeholder="전형" class="f-track">
+      <input type="text" placeholder="학과" class="f-major">
+      <div class="result-field full">
+        <input type="number" class="f-grade" placeholder="지원 등급" step="0.01" min="1" max="9">
+        <input type="number" class="f-lastcut" placeholder="작년 합격선(참고)" step="0.01" min="1" max="9">${suneungHtml}
+        <select class="f-result" onchange="toggleWaitNum(this)">
+          <option value="">결과 미정</option>
+          <option value="최초합격">최초합격</option>
+          <option value="예비">예비</option>
+          <option value="충원합격">충원합격</option>
+          <option value="불합격">불합격</option>
+        </select>
+        <input type="number" class="f-note" placeholder="현재 예비 번호" style="display:none;">
+        <select class="f-enroll" style="display:none;">
+          <option value="">등록여부 미정</option>
+          <option value="등록">등록</option>
+          <option value="미등록">미등록</option>
+        </select>
+      </div>
+    </div>
+  `;
+  return wrap;
+}
+
+function initRows(){
+  const fy = document.getElementById('fourYearRows');
+  const cg = document.getElementById('collegeRows');
+  fy.innerHTML=''; cg.innerHTML='';
+  for(let i=1;i<=6;i++) fy.appendChild(buildRow('4년제', i));
+  for(let i=1;i<=10;i++) cg.appendChild(buildRow('전문대', i));
+}
+initRows();
+
+function toggleSuneungCond(sel){
+  const row = sel.closest('.apply-row');
+  const cond = row.querySelector('.f-suneungcond');
+  if(sel.value === '있음'){ cond.style.display = 'inline-block'; }
+  else { cond.style.display = 'none'; cond.value=''; }
+}
+
+function toggleWaitNum(sel){
+  const row = sel.closest('.apply-row');
+  const note = row.querySelector('.f-note');
+  const enroll = row.querySelector('.f-enroll');
+  const needsNote = ['예비','충원합격'].includes(sel.value);
+  const isPass = ['최초합격','충원합격'].includes(sel.value);
+  if(needsNote){
+    note.style.display = 'inline-block';
+  }else{
+    note.style.display = 'none'; note.value='';
+  }
+  if(isPass){
+    enroll.style.display = 'inline-block';
+  }else{
+    enroll.style.display = 'none'; enroll.value='';
+  }
+}
+
+function readRows(containerId){
+  const rows = document.querySelectorAll('#'+containerId+' .apply-row');
+  const out = [];
+  rows.forEach(r=>{
+    const 학교명 = r.querySelector('.f-school').value.trim();
+    const 전형 = r.querySelector('.f-track').value.trim();
+    const 학과 = r.querySelector('.f-major').value.trim();
+    const 등급 = r.querySelector('.f-grade').value;
+    const 참고등급 = r.querySelector('.f-lastcut').value;
+    const suneungEl = r.querySelector('.f-suneung');
+    const 수능최저 = suneungEl ? suneungEl.value : '';
+    const suneungCondEl = r.querySelector('.f-suneungcond');
+    const 수능최저조건 = suneungCondEl ? suneungCondEl.value.trim() : '';
+    const 결과 = r.querySelector('.f-result').value;
+    const 예비번호 = r.querySelector('.f-note').value.trim();
+    const 등록여부 = r.querySelector('.f-enroll').value;
+    if(학교명) out.push({학교명, 전형, 학과, 등급, 참고등급, 결과, 예비번호, 수능최저, 수능최저조건, 등록여부});
+  });
+  return out;
+}
+
+/** 이전 버전의 결과값을 지금 결과 옵션에 맞춰 보정 (기존 데이터 호환용) */
+function normalizeResult(r){
+  const map = {'최초합':'최초합격', '최초예비':'예비', '최종예비':'예비', '예비합격':'충원합격', '추합':'충원합격'};
+  return map[r] || r || '';
+}
+
+function fillRows(containerId, apps){
+  const rows = document.querySelectorAll('#'+containerId+' .apply-row');
+  rows.forEach(r=>{
+    r.querySelector('.f-school').value='';
+    r.querySelector('.f-track').value='';
+    r.querySelector('.f-major').value='';
+    r.querySelector('.f-grade').value='';
+    r.querySelector('.f-lastcut').value='';
+    const suneungEl = r.querySelector('.f-suneung');
+    if(suneungEl) suneungEl.value='';
+    const suneungCondEl = r.querySelector('.f-suneungcond');
+    if(suneungCondEl){ suneungCondEl.value=''; suneungCondEl.style.display='none'; }
+    r.querySelector('.f-result').value='';
+    const note = r.querySelector('.f-note');
+    note.value=''; note.style.display='none';
+    const enroll = r.querySelector('.f-enroll');
+    enroll.value=''; enroll.style.display='none';
+  });
+  (apps||[]).forEach(a=>{
+    const idx = (a.순번||1)-1;
+    if(rows[idx]){
+      rows[idx].querySelector('.f-school').value = a.학교명||'';
+      rows[idx].querySelector('.f-track').value = a.전형||'';
+      rows[idx].querySelector('.f-major').value = a.학과||'';
+      rows[idx].querySelector('.f-grade').value = a.등급||'';
+      rows[idx].querySelector('.f-lastcut').value = a.참고등급||'';
+      const suneungEl2 = rows[idx].querySelector('.f-suneung');
+      if(suneungEl2) suneungEl2.value = a.수능최저||'';
+      const suneungCondEl2 = rows[idx].querySelector('.f-suneungcond');
+      if(suneungCondEl2){
+        suneungCondEl2.value = a.수능최저조건||'';
+        suneungCondEl2.style.display = (a.수능최저==='있음') ? 'inline-block' : 'none';
+      }
+      const 결과값 = normalizeResult(a.결과);
+      rows[idx].querySelector('.f-result').value = 결과값;
+      const needsNote = ['예비','충원합격'].includes(결과값);
+      const isPass = ['최초합격','충원합격'].includes(결과값);
+      // 현재 입력칸에는 "최종(가장 최근) 예비번호"를 불러와 이어서 갱신할 수 있게 함
+      const note = rows[idx].querySelector('.f-note');
+      note.value = (a.최종예비번호 !== undefined && a.최종예비번호 !== '') ? a.최종예비번호 : (a.예비번호||'');
+      note.style.display = needsNote ? 'inline-block' : 'none';
+      const enroll = rows[idx].querySelector('.f-enroll');
+      enroll.value = a.등록여부||'';
+      enroll.style.display = isPass ? 'inline-block' : 'none';
+    }
+  });
+}
+
+/* ---------------- 내신 등급 계산기 ---------------- */
+function buildCalcRow(){
+  const wrap = document.createElement('div');
+  wrap.className = 'calc-row';
+  wrap.innerHTML = `
+    <input type="text" placeholder="과목명" class="cc-subject">
+    <input type="number" placeholder="등급" class="cc-grade" min="1" max="9" step="1" oninput="computeCalc()">
+    <input type="number" placeholder="단위수" class="cc-unit" min="1" step="1" oninput="computeCalc()">
+    <button type="button" class="calc-remove" onclick="removeCalcRow(this)">✕</button>
+  `;
+  return wrap;
+}
+
+function addCalcRow(){
+  document.getElementById('calcRows').appendChild(buildCalcRow());
+}
+
+function removeCalcRow(btn){
+  btn.closest('.calc-row').remove();
+  computeCalc();
+}
+
+function computeCalc(){
+  const rows = document.querySelectorAll('#calcRows .calc-row');
+  let sumWeighted = 0, sumUnit = 0;
+  rows.forEach(r=>{
+    const g = parseFloat(r.querySelector('.cc-grade').value);
+    const u = parseFloat(r.querySelector('.cc-unit').value);
+    if(!isNaN(g) && !isNaN(u) && u>0){ sumWeighted += g*u; sumUnit += u; }
+  });
+  const result = sumUnit>0 ? (sumWeighted/sumUnit) : null;
+  document.getElementById('calcResult').textContent = result!==null ? result.toFixed(2) : '-';
+  return result;
+}
+
+function copyCalcResult(){
+  const box = document.getElementById('calcCopyMsg');
+  const val = document.getElementById('calcResult').textContent;
+  if(val==='-'){ box.textContent = '먼저 과목별 등급과 단위수를 입력해주세요 🙂'; return; }
+  navigator.clipboard.writeText(val).then(()=>{
+    box.textContent = `✨ ${val} 복사 완료! 지원할 학교의 "지원 등급"란에 붙여넣어 주세요.`;
+  }).catch(()=>{
+    box.textContent = `복사에 실패했어요. 값을 직접 입력해주세요: ${val}`;
+  });
+}
+
+function initCalc(){
+  const container = document.getElementById('calcRows');
+  container.innerHTML = '';
+  for(let i=0;i<3;i++) container.appendChild(buildCalcRow());
+}
+initCalc();
+
+let fullRoster = [];
+
+async function initRoster(){
+  checkConfig();
+  const rosterField = document.getElementById('rosterField');
+  const manual = document.getElementById('manualEntry');
+  const classSel = document.getElementById('s_class');
+  try{
+    const res = await callApi('getRoster', {});
+    fullRoster = (res.roster||[]).filter(r=>r.번호 && r.이름);
+    if(fullRoster.length > 0){
+      const classes = [...new Set(fullRoster.map(r=>r.반||'3학년 8반'))];
+      classSel.innerHTML = classes.map(c=>`<option value="${c}">${c}</option>`).join('');
+      renderRosterList(classSel.value);
+      rosterField.style.display = 'block';
+      manual.style.display = 'none';
+    }else{
+      classSel.innerHTML = '<option value="3학년 8반">3학년 8반</option>';
+      rosterField.style.display = 'none';
+      manual.style.display = 'block';
+    }
+  }catch(err){
+    classSel.innerHTML = '<option value="3학년 8반">3학년 8반</option>';
+    rosterField.style.display = 'none';
+    manual.style.display = 'block';
+  }
+}
+
+function onClassChange(){
+  renderRosterList(document.getElementById('s_class').value);
+}
+
+function renderRosterList(cls){
+  const sel = document.getElementById('rosterSelect');
+  const filtered = fullRoster
+    .filter(r => (r.반||'3학년 8반') === cls)
+    .sort((a,b)=> String(a.번호).localeCompare(String(b.번호), undefined, {numeric:true}));
+  sel.innerHTML = '<option value="">-- 선택 --</option>' +
+    (filtered.length ? filtered.map(r=>`<option value="${r.번호}|${r.이름}">${r.번호}번 ${r.이름}</option>`).join('') : '');
+}
+
+function onRosterSelectChange(){
+  const sel = document.getElementById('rosterSelect');
+  if(!sel.value) return;
+  const [번호, 이름] = sel.value.split('|');
+  document.getElementById('s_num').value = 번호;
+  document.getElementById('s_name').value = 이름;
+  loadStudent();
+}
+
+function parseCombo(){
+  const val = document.getElementById('s_combo').value.trim();
+  const parts = val.split(/[\s,]+/).filter(Boolean);
+  const 번호 = parts[0] || '';
+  const 이름 = parts.slice(1).join(' ') || '';
+  document.getElementById('s_num').value = 번호;
+  document.getElementById('s_name').value = 이름;
+}
+
+async function loadStudent(){
+  if(!checkConfig()) return;
+  const 학번 = document.getElementById('s_num').value.trim();
+  const 이름 = document.getElementById('s_name').value.trim();
+  const 반 = document.getElementById('s_class').value.trim();
+  const box = document.getElementById('loadMsg');
+  if(!학번 || !이름){ box.innerHTML = '<div class="msg err">학번과 이름을 입력하세요.</div>'; return; }
+  box.innerHTML = '불러오는 중...';
+  try{
+    const res = await callApi('getStudentData', {학번, 이름, 반});
+    if(!res.ok){ box.innerHTML = '<div class="msg err">불러오기 실패</div>'; return; }
+    if(res.student){
+      document.getElementById('s_class').value = res.student.반 || '3학년 8반';
+    }
+    fillRows('fourYearRows', (res.applications||[]).filter(a=>a.유형==='4년제'));
+    fillRows('collegeRows', (res.applications||[]).filter(a=>a.유형==='전문대'));
+    updateCountsFromRows();
+    box.innerHTML = '<div class="msg ok">📂 기존 자료를 불러왔어요! (처음이면 새로 입력 후 저장하세요)</div>';
+  }catch(err){
+    box.innerHTML = '<div class="msg err">오류: '+err.message+'</div>';
+  }
+}
+
+function selectType(type){
+  const 학번 = document.getElementById('s_num').value.trim();
+  if(!학번){
+    alert('먼저 번호와 이름을 선택해 주세요.');
+    return;
+  }
+  currentType = type;
+  document.getElementById('typeBtn4y').classList.toggle('active', type==='4년제');
+  document.getElementById('typeBtnJc').classList.toggle('active', type==='전문대');
+  document.getElementById('applyCard').style.display = 'block';
+  document.getElementById('fourYearRows').style.display = type==='4년제' ? 'block' : 'none';
+  document.getElementById('collegeRows').style.display = type==='전문대' ? 'block' : 'none';
+  document.getElementById('applyHeading').textContent = type==='4년제' ? '🏫 4년제 대학 지원' : '🎓 전문대학 지원';
+  document.getElementById('applyLimit').textContent = type==='4년제' ? '최대 6개까지 입력 가능합니다.' : '최대 10개까지 입력 가능합니다.';
+  document.getElementById('saveMsg').innerHTML = '';
+  document.getElementById('applyCard').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function updateCountsFromRows(){
+  document.getElementById('count4yLabel').textContent = `${readRows('fourYearRows').length}/6 입력`;
+  document.getElementById('countJcLabel').textContent = `${readRows('collegeRows').length}/10 입력`;
+}
+
+async function saveCurrentType(){
+  if(!checkConfig()) return;
+  if(!currentType) return;
+  const 학번 = document.getElementById('s_num').value.trim();
+  const 이름 = document.getElementById('s_name').value.trim();
+  const 반 = document.getElementById('s_class').value.trim();
+  const box = document.getElementById('saveMsg');
+  if(!학번 || !이름){ box.innerHTML = '<div class="msg err">번호와 이름을 먼저 선택하세요.</div>'; return; }
+
+  const rows = readRows(currentType==='4년제' ? 'fourYearRows' : 'collegeRows');
+
+  box.innerHTML = '저장 중...';
+  try{
+    await callApi('saveStudent', {학번, 이름, 반});
+    await callApi('saveApplications', {학번, 이름, 반, 유형: currentType, applications: rows});
+    box.innerHTML = '<div class="msg ok">🎉 저장 완료! 오늘도 한 걸음 더 가까워졌어요 ✨</div>';
+    updateCountsFromRows();
+  }catch(err){
+    box.innerHTML = '<div class="msg err">오류: '+err.message+'</div>';
+  }
+}
+
+/* ---------------- 교사 화면 ---------------- */
+async function teacherLogin(){
+  if(!checkConfig()) return;
+  const pw = document.getElementById('t_pw').value;
+  const box = document.getElementById('loginMsg');
+  box.innerHTML = '확인 중...';
+  try{
+    const res = await callApi('teacherLogin', {password: pw});
+    if(res.ok){
+      teacherPw = pw;
+      document.getElementById('teacherLogin').style.display='none';
+      document.getElementById('teacherMain').style.display='block';
+      await refreshAllData();
+    }else{
+      box.innerHTML = '<div class="msg err">비밀번호가 올바르지 않습니다.</div>';
+    }
+  }catch(err){
+    box.innerHTML = '<div class="msg err">오류: '+err.message+'</div>';
+  }
+}
+
+async function refreshAllData(){
+  const res = await callApi('getAllData', {password: teacherPw});
+  if(!res.ok){ alert(res.error||'데이터를 불러오지 못했습니다.'); return; }
+  allData = res;
+  populateClassFilter();
+  populateStudentSelect();
+  renderCutoffTable();
+  renderStudentReport();
+}
+
+function switchTeachTab(t){
+  document.getElementById('tab-consult').classList.toggle('active', t==='consult');
+  document.getElementById('tab-cutoff').classList.toggle('active', t==='cutoff');
+  document.getElementById('tab-roster').classList.toggle('active', t==='roster');
+  document.getElementById('teach-consult').classList.toggle('active', t==='consult');
+  document.getElementById('teach-cutoff').classList.toggle('active', t==='cutoff');
+  document.getElementById('teach-roster').classList.toggle('active', t==='roster');
+  if(t==='roster') loadRosterTable();
+}
+
+function getStudentUnionList_(){
+  const keySet = {};
+  const list = [];
+  (allData.students||[]).forEach(s=>{
+    const key = s.학번+'|'+s.이름;
+    if(!keySet[key]){ keySet[key]=1; list.push(s); }
+  });
+  (allData.applications||[]).forEach(a=>{
+    const key = a.학번+'|'+a.이름;
+    if(!keySet[key]){ keySet[key]=1; list.push({학번:a.학번, 이름:a.이름}); }
+  });
+  return list;
+}
+
+function populateClassFilter(){
+  const sel = document.getElementById('classFilter');
+  const list = getStudentUnionList_();
+  const classes = [...new Set(list.map(s=>s.반).filter(Boolean))].sort();
+  const prevValue = sel.value;
+  sel.innerHTML = '<option value="">전체 반</option>' + classes.map(c=>`<option value="${c}">${c}</option>`).join('');
+  if(classes.includes(prevValue)) sel.value = prevValue;
+}
+
+function onClassFilterChange(){
+  populateStudentSelect();
+  document.getElementById('studentReport').innerHTML = '';
+}
+
+function populateStudentSelect(){
+  const sel = document.getElementById('studentSelect');
+  const clsFilter = document.getElementById('classFilter').value;
+  let list = getStudentUnionList_();
+  if(clsFilter) list = list.filter(s=>s.반===clsFilter);
+  list.sort((a,b)=> String(a.학번).localeCompare(String(b.학번), undefined, {numeric:true}));
+  sel.innerHTML = list.map(s=>`<option value="${s.학번}|${s.이름}">${s.반?`[${s.반}] `:''}${s.학번} ${s.이름}</option>`).join('');
+  if(list.length===0){ sel.innerHTML = '<option value="">등록된 학생이 없습니다</option>'; }
+}
+
+function norm(s){ return (s||'').toString().replace(/\s+/g,''); }
+
+function matchCutoffs(app){
+  return (allData.cutoffs||[]).filter(c =>
+    c.유형 === app.유형 &&
+    norm(c.학교명) === norm(app.학교명) &&
+    norm(c.전형) === norm(app.전형) &&
+    norm(c.학과) === norm(app.학과)
+  ).sort((a,b)=> (b.연도||0)-(a.연도||0)).slice(0,3);
+}
+
+function judge(app){
+  const cuts = matchCutoffs(app);
+  const grade = parseFloat(app.등급);
+  if(cuts.length===0){
+    return {status:'none', label:'데이터없음', avg:null, cuts:[], point:'해당 학교/전형/학과의 입결 데이터가 아직 없습니다. 입결데이터 관리 탭에서 데이터를 추가해 주세요.'};
+  }
+  if(isNaN(grade)){
+    return {status:'none', label:'등급 미입력', avg:null, cuts, point:'이 지원 건에 지원 등급이 입력되지 않았습니다. 학생 화면에서 해당 학교의 지원 등급을 입력해야 판정할 수 있습니다.'};
+  }
+  const vals = cuts.map(c=>parseFloat(c.컷등급)).filter(v=>!isNaN(v));
+  if(vals.length===0){
+    return {status:'none', label:'데이터없음', avg:null, cuts, point:'등록된 입결 데이터의 컷등급 값이 없습니다.'};
+  }
+  const avg = vals.reduce((a,b)=>a+b,0)/vals.length;
+  const gap = avg - grade; // 양수: 학생이 컷보다 우수(등급 숫자가 낮음)
+  let status, label, point;
+  if(gap > 0.3){
+    status='safe'; label='안정';
+    point='최근 합격선보다 지원 등급이 우수해 안정적으로 지원 가능한 조합입니다. 다만 방심하지 말고 마무리까지 관리가 필요합니다.';
+  }else if(gap >= -0.3){
+    status='fit'; label='적정';
+    point='최근 3개년 합격선과 비슷한 수준입니다. 실제 결과는 해당 연도 지원자 수·경쟁률에 따라 달라질 수 있어 균형 있는 지원 조합으로 적절합니다.';
+  }else{
+    status='reach'; label='상향';
+    point='최근 합격선 대비 지원 등급이 다소 낮아 상향 지원에 해당합니다. 적정·안정 지원과 함께 균형 있게 배치하는 것을 권장합니다.';
+  }
+  if(vals.length>=2){
+    const sortedByYear = cuts.slice().sort((a,b)=>(a.연도||0)-(b.연도||0));
+    const first = parseFloat(sortedByYear[0].컷등급), last = parseFloat(sortedByYear[sortedByYear.length-1].컷등급);
+    if(!isNaN(first) && !isNaN(last)){
+      if(last - first < -0.2) point += ' 최근 합격선이 상승(등급 강화)하는 추세이니 다음 결과 예측 시 유의하세요.';
+      else if(last - first > 0.2) point += ' 최근 합격선이 완화되는 추세입니다.';
+    }
+  }
+  return {status, label, avg, cuts, point};
+}
+
+function badgeHtml(j){
+  const emoji = {safe:'🌿', fit:'🙂', reach:'🔥', none:'❔'}[j.status] || '';
+  return `<span class="badge ${j.status}">${emoji} ${j.label}</span>`;
+}
+
+function suneungText(app){
+  if(!app.수능최저) return '-';
+  if(app.수능최저==='있음' && app.수능최저조건) return `있음 (${app.수능최저조건})`;
+  return app.수능최저;
+}
+
+function resultText(app){
+  return app.결과 || '-';
+}
+
+function appRowHtml(app, idx){
+  const j = judge(app);
+  const cutText = j.cuts.length ? j.cuts.map(c=>`${c.연도}:${c.컷등급}`).join(' / ') : '-';
+  const avgText = j.avg!==null ? j.avg.toFixed(2) : '-';
+  return `<tr>
+    <td>${idx}</td>
+    <td>${app.학교명}</td>
+    <td>${app.전형||'-'}</td>
+    <td>${app.학과||'-'}</td>
+    <td>${app.등급||'-'}</td>
+    <td>${app.참고등급||'-'}</td>
+    <td>${suneungText(app)}</td>
+    <td>${resultText(app)}</td>
+    <td>${app.예비번호||'-'}</td>
+    <td>${app.최종예비번호||'-'}</td>
+    <td>${app.등록여부||'-'}</td>
+    <td>${cutText}</td>
+    <td>${avgText}</td>
+    <td>${badgeHtml(j)}</td>
+    <td class="point">${j.point}</td>
+  </tr>`;
+}
+
+function renderStudentReport(){
+  const box = document.getElementById('studentReport');
+  const sel = document.getElementById('studentSelect');
+  if(!allData || !sel.value){ box.innerHTML=''; return; }
+  const [학번, 이름] = sel.value.split('|');
+  const apps = (allData.applications||[]).filter(a=>String(a.학번)===학번 && a.이름===이름);
+  const fourYear = apps.filter(a=>a.유형==='4년제').sort((a,b)=>(a.순번||0)-(b.순번||0));
+  const college = apps.filter(a=>a.유형==='전문대').sort((a,b)=>(a.순번||0)-(b.순번||0));
+
+  const allJudged = apps.map(a=>judge(a));
+  const cnt = {safe:0, fit:0, reach:0};
+  allJudged.forEach(j=>{ if(cnt[j.status]!==undefined) cnt[j.status]++; });
+
+  const grades = apps.map(a=>parseFloat(a.등급)).filter(v=>!isNaN(v));
+  const avgGrade = grades.length ? (grades.reduce((a,b)=>a+b,0)/grades.length).toFixed(2) : null;
+
+  const memo = (allData.memos||[]).find(m=>String(m.학번)===학번 && m.이름===이름);
+
+  let html = `
+    <div class="summary-badges">
+      <span class="grade-pill">📊 평균 지원등급 ${avgGrade || '미입력'}</span>
+      <span class="sbadge safe">🌿 안정 ${cnt.safe}</span>
+      <span class="sbadge fit">🙂 적정 ${cnt.fit}</span>
+      <span class="sbadge reach">🔥 상향 ${cnt.reach}</span>
+    </div>
+  `;
+
+  html += `<div class="section-title">🏫 4년제 지원 (${fourYear.length}/6)</div>`;
+  html += fourYear.length ? `<div class="app-table-wrap"><table><thead><tr><th>순번</th><th>학교명</th><th>전형</th><th>학과</th><th>지원등급</th><th>작년컷(참고)</th><th>수능최저</th><th>결과</th><th>최초예비</th><th>최종예비</th><th>등록여부</th><th>3개년 컷등급</th><th>평균</th><th>판정</th><th>지도포인트</th></tr></thead><tbody>${fourYear.map((a,i)=>appRowHtml(a,i+1)).join('')}</tbody></table></div>` : `<div class="empty">입력된 4년제 지원이 없습니다.</div>`;
+
+  html += `<div class="section-title">🎓 전문대 지원 (${college.length}/10)</div>`;
+  html += college.length ? `<div class="app-table-wrap"><table><thead><tr><th>순번</th><th>학교명</th><th>전형</th><th>학과</th><th>지원등급</th><th>작년컷(참고)</th><th>수능최저</th><th>결과</th><th>최초예비</th><th>최종예비</th><th>등록여부</th><th>3개년 컷등급</th><th>평균</th><th>판정</th><th>지도포인트</th></tr></thead><tbody>${college.map((a,i)=>appRowHtml(a,i+1)).join('')}</tbody></table></div>` : `<div class="empty">입력된 전문대 지원이 없습니다.</div>`;
+
+  html += `
+    <div class="section-title">교사 지도 메모</div>
+    <textarea id="teacherMemo" rows="4" placeholder="상담 시 참고할 메모를 자유롭게 기록하세요.">${memo ? memo.메모 : ''}</textarea>
+    <div style="margin-top:8px;">
+      <button class="btn ghost" onclick="saveMemo('${학번}','${이름.replace(/'/g,"\\'")}')">메모 저장</button>
+      <span id="memoMsg"></span>
+    </div>
+  `;
+
+  box.innerHTML = html;
+}
+
+function esc(s){
+  return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function printTableHtml(list){
+  if(!list.length) return '<p style="color:#888; font-size:11.5px;">입력된 지원이 없습니다.</p>';
+  return `<table class="print-table">
+    <thead><tr><th>순번</th><th>학교명</th><th>전형</th><th>학과</th><th>지원등급</th><th>작년컷(참고)</th><th>수능최저</th><th>결과</th><th>최초예비</th><th>최종예비</th><th>등록여부</th><th>3개년 컷등급</th><th>평균</th><th>판정</th><th>지도포인트</th></tr></thead>
+    <tbody>${list.map((a,i)=>{
+      const j = judge(a);
+      const cutText = j.cuts.length ? j.cuts.map(c=>`${c.연도}:${c.컷등급}`).join(' / ') : '-';
+      const avgText = j.avg!==null ? j.avg.toFixed(2) : '-';
+      return `<tr>
+        <td>${i+1}</td><td>${esc(a.학교명)}</td><td>${esc(a.전형)||'-'}</td><td>${esc(a.학과)||'-'}</td>
+        <td>${esc(a.등급)||'-'}</td><td>${esc(a.참고등급)||'-'}</td><td>${esc(suneungText(a))}</td><td>${esc(resultText(a))}</td><td>${esc(a.예비번호)||'-'}</td><td>${esc(a.최종예비번호)||'-'}</td><td>${esc(a.등록여부)||'-'}</td>
+        <td>${esc(cutText)}</td><td>${avgText}</td><td>${j.label}</td><td>${esc(j.point)}</td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+}
+
+function buildPrintReport(학번, 이름){
+  const student = (allData.students||[]).find(s=>String(s.학번)===학번 && s.이름===이름);
+  const 반 = student ? student.반 : '';
+  const apps = (allData.applications||[]).filter(a=>String(a.학번)===학번 && a.이름===이름);
+  const fourYear = apps.filter(a=>a.유형==='4년제').sort((a,b)=>(a.순번||0)-(b.순번||0));
+  const college = apps.filter(a=>a.유형==='전문대').sort((a,b)=>(a.순번||0)-(b.순번||0));
+  const memo = (allData.memos||[]).find(m=>String(m.학번)===학번 && m.이름===이름);
+
+  return `
+    <div class="print-page">
+      <h2>${esc(반)} ${esc(학번)}번 ${esc(이름)} — 대입 지원 상담 리포트</h2>
+      <p class="print-meta">출력일: ${new Date().toLocaleDateString('ko-KR')}</p>
+      <h3>🏫 4년제 대학 지원</h3>
+      ${printTableHtml(fourYear)}
+      <h3>🎓 전문대학 지원</h3>
+      ${printTableHtml(college)}
+      <h3>교사 지도 메모</h3>
+      <div class="print-memo">${memo && memo.메모 ? esc(memo.메모) : '(메모 없음)'}</div>
+    </div>
+  `;
+}
+
+function printCurrentStudent(){
+  const sel = document.getElementById('studentSelect');
+  if(!sel.value){ alert('먼저 학생을 선택하세요.'); return; }
+  const [학번, 이름] = sel.value.split('|');
+  document.getElementById('printArea').innerHTML = buildPrintReport(학번, 이름);
+  window.print();
+}
+
+function printAllStudents(){
+  if(!allData){ alert('데이터를 불러온 후 다시 시도하세요.'); return; }
+  const clsFilter = document.getElementById('classFilter').value;
+  let list = getStudentUnionList_();
+  if(clsFilter) list = list.filter(s=>s.반===clsFilter);
+  if(list.length===0){ alert('출력할 학생 데이터가 없습니다.'); return; }
+  list.sort((a,b)=> String(a.학번).localeCompare(String(b.학번), undefined, {numeric:true}));
+  document.getElementById('printArea').innerHTML = list.map(s=>buildPrintReport(s.학번, s.이름)).join('');
+  window.print();
+}
+
+async function saveMemo(학번, 이름){
+  const 메모 = document.getElementById('teacherMemo').value;
+  const box = document.getElementById('memoMsg');
+  box.textContent = ' 저장 중...';
+  try{
+    await callApi('saveMemo', {password: teacherPw, 학번, 이름, 메모});
+    box.textContent = ' 저장됨';
+    const m = (allData.memos||[]).find(m=>String(m.학번)===학번 && m.이름===이름);
+    if(m) m.메모 = 메모; else allData.memos.push({학번, 이름, 메모});
+  }catch(err){
+    box.textContent = ' 오류: '+err.message;
+  }
+}
+
+/* ---------------- 입결데이터 관리 ---------------- */
+function renderCutoffTable(){
+  const tbody = document.getElementById('cutoffTbody');
+  if(!allData){ tbody.innerHTML=''; return; }
+  const filter = norm(document.getElementById('cutoffFilter').value);
+  let rows = allData.cutoffs || [];
+  if(filter){
+    rows = rows.filter(c => norm(c.학교명).includes(filter) || norm(c.학과).includes(filter));
+  }
+  rows = rows.slice().sort((a,b)=> String(a.학교명).localeCompare(String(b.학교명)) || (b.연도-a.연도));
+  if(rows.length===0){ tbody.innerHTML = '<tr><td colspan="8" class="empty">등록된 입결 데이터가 없습니다.</td></tr>'; return; }
+  tbody.innerHTML = rows.map(c=>`
+    <tr>
+      <td>${c.유형}</td>
+      <td>${c.학교명}</td>
+      <td>${c.전형||'-'}</td>
+      <td>${c.학과||'-'}</td>
+      <td>${c.연도}</td>
+      <td>${c.컷등급}</td>
+      <td>${c.비고||'-'}</td>
+      <td style="white-space:nowrap;">
+        <button class="btn ghost small-btn" onclick="editCutoff('${c.ID}')">수정</button>
+        <button class="btn danger small-btn" onclick="removeCutoff('${c.ID}')">삭제</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function editCutoff(id){
+  const c = (allData.cutoffs||[]).find(x=>x.ID===id);
+  if(!c) return;
+  document.getElementById('c_id').value = c.ID;
+  document.getElementById('c_type').value = c.유형;
+  document.getElementById('c_school').value = c.학교명;
+  document.getElementById('c_track').value = c.전형||'';
+  document.getElementById('c_major').value = c.학과||'';
+  document.getElementById('c_year').value = c.연도;
+  document.getElementById('c_cut').value = c.컷등급;
+  document.getElementById('c_note').value = c.비고||'';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+async function saveCutoff(){
+  const cutoff = {
+    ID: document.getElementById('c_id').value || null,
+    유형: document.getElementById('c_type').value,
+    학교명: document.getElementById('c_school').value.trim(),
+    전형: document.getElementById('c_track').value.trim(),
+    학과: document.getElementById('c_major').value.trim(),
+    연도: document.getElementById('c_year').value,
+    컷등급: document.getElementById('c_cut').value,
+    비고: document.getElementById('c_note').value.trim()
+  };
+  const box = document.getElementById('cutoffMsg');
+  if(!cutoff.학교명 || !cutoff.연도 || !cutoff.컷등급){
+    box.innerHTML = '<div class="msg err">학교명, 연도, 컷등급은 필수입니다.</div>'; return;
+  }
+  box.innerHTML = '저장 중...';
+  try{
+    const res = await callApi('saveCutoff', {password: teacherPw, cutoff});
+    if(!res.ok){ box.innerHTML = '<div class="msg err">'+(res.error||'저장 실패')+'</div>'; return; }
+    box.innerHTML = '<div class="msg ok">저장되었습니다.</div>';
+    ['c_id','c_school','c_track','c_major','c_year','c_cut','c_note'].forEach(id=>document.getElementById(id).value='');
+    await refreshAllData();
+  }catch(err){
+    box.innerHTML = '<div class="msg err">오류: '+err.message+'</div>';
+  }
+}
+
+async function estimateCutoffsFromResults(){
+  if(!allData){ alert('데이터를 불러온 후 다시 시도하세요.'); return; }
+  const box = document.getElementById('estimateMsg');
+  const year = allData.year || new Date().getFullYear();
+  const apps = allData.applications || [];
+  const passResults = ['최초합격','충원합격','최초합','예비합격','추합']; // 뒤 세 개는 이전 버전 데이터 호환용
+
+  const groups = {};
+  apps.forEach(a=>{
+    const grade = parseFloat(a.등급);
+    if(!passResults.includes(a.결과) || isNaN(grade)) return;
+    const key = [a.유형, norm(a.학교명), norm(a.전형), norm(a.학과)].join('||');
+    if(!groups[key]) groups[key] = {유형:a.유형, 학교명:a.학교명, 전형:a.전형, 학과:a.학과, grades:[]};
+    groups[key].grades.push(grade);
+  });
+
+  const groupList = Object.values(groups);
+  if(groupList.length===0){
+    box.textContent = '아직 합격(최초합격/충원합격) 결과와 등급이 함께 입력된 지원 건이 없습니다.';
+    return;
+  }
+
+  if(!confirm(`${groupList.length}개 학교/전형/학과 조합의 합격선을 추정해서 ${year}년도로 등록할까요? (이미 등록된 공식 데이터는 건너뜁니다)`)) return;
+
+  let added=0, updated=0, skipped=0;
+  box.textContent = '추정 중...';
+  for(const g of groupList){
+    const cutGrade = Math.max(...g.grades); // 합격 사례 중 가장 낮은(느슨한) 등급을 커트라인 추정치로 사용
+    const existing = (allData.cutoffs||[]).find(c=>
+      c.유형===g.유형 && norm(c.학교명)===norm(g.학교명) && norm(c.전형)===norm(g.전형) && norm(c.학과)===norm(g.학과) && String(c.연도)===String(year)
+    );
+    const note = `교내자체데이터(합격 ${g.grades.length}건 기준)`;
+    try{
+      if(existing){
+        if(String(existing.비고||'').includes('교내자체데이터')){
+          await callApi('saveCutoff', {password: teacherPw, cutoff:{ID: existing.ID, 유형:g.유형, 학교명:g.학교명, 전형:g.전형, 학과:g.학과, 연도:year, 컷등급:cutGrade.toFixed(2), 비고: note}});
+          updated++;
+        }else{
+          skipped++;
+        }
+      }else{
+        await callApi('saveCutoff', {password: teacherPw, cutoff:{유형:g.유형, 학교명:g.학교명, 전형:g.전형, 학과:g.학과, 연도:year, 컷등급:cutGrade.toFixed(2), 비고: note}});
+        added++;
+      }
+    }catch(err){
+      // 개별 건 실패는 건너뛰고 계속 진행
+    }
+  }
+  box.textContent = `완료! 신규 ${added}건, 갱신 ${updated}건, 기존 공식 데이터라 건너뜀 ${skipped}건`;
+  await refreshAllData();
+}
+
+async function bulkSaveCutoff(){
+  const box = document.getElementById('bulkMsg');
+  const raw = document.getElementById('bulkPaste').value.trim();
+  if(!raw){ box.textContent = ' 붙여넣을 내용이 없습니다.'; return; }
+  const lines = raw.split('\n').map(l=>l.trim()).filter(l=>l);
+  const rows = lines.map(line=>{
+    const parts = line.indexOf('\t')>=0 ? line.split('\t') : line.split(',');
+    const [유형, 학교명, 전형, 학과, 연도, 컷등급, 비고] = parts.map(v=>(v||'').trim());
+    return {유형: 유형||'4년제', 학교명, 전형, 학과, 연도, 컷등급, 비고};
+  }).filter(r=>r.학교명 && r.연도 && r.컷등급);
+
+  if(rows.length===0){ box.textContent = ' 형식을 확인해주세요. (유형,학교명,전형,학과,연도,컷등급,비고)'; return; }
+  box.textContent = ' 등록 중...';
+  try{
+    const res = await callApi('bulkSaveCutoff', {password: teacherPw, rows});
+    if(!res.ok){ box.textContent = ' 오류: '+(res.error||''); return; }
+    box.textContent = ` ${res.added}건 등록 완료${res.failed?`, ${res.failed}건 형식 오류로 제외`:''}`;
+    document.getElementById('bulkPaste').value='';
+    await refreshAllData();
+  }catch(err){
+    box.textContent = ' 오류: '+err.message;
+  }
+}
+
+async function removeCutoff(id){
+  if(!confirm('이 입결 데이터를 삭제할까요?')) return;
+  try{
+    await callApi('deleteCutoff', {password: teacherPw, id});
+    await refreshAllData();
+  }catch(err){
+    alert('삭제 오류: '+err.message);
+  }
+}
+
+/* ---------------- 명렬 관리 ---------------- */
+async function saveRoster(){
+  const box = document.getElementById('rosterMsg');
+  const cls = document.getElementById('r_class').value.trim();
+  const raw = document.getElementById('rosterPaste').value.trim();
+  if(!raw){ box.textContent = ' 붙여넣을 내용이 없습니다.'; return; }
+  const lines = raw.split('\n').map(l=>l.trim()).filter(l=>l);
+  const rows = lines.map(line=>{
+    const parts = line.indexOf('\t')>=0 ? line.split('\t') : line.split(',');
+    const [번호, 이름] = parts.map(v=>(v||'').trim());
+    return {번호, 이름, 반: cls};
+  }).filter(r=>r.번호 && r.이름);
+  if(rows.length===0){ box.textContent = ' 형식을 확인해주세요. (번호,이름)'; return; }
+  if(!confirm(`'${cls}' 명렬을 ${rows.length}명으로 교체할까요? (다른 반은 영향 없음)`)) return;
+  box.textContent = ' 등록 중...';
+  try{
+    const res = await callApi('bulkSaveRoster', {password: teacherPw, rows});
+    if(!res.ok){ box.textContent = ' 오류: '+(res.error||''); return; }
+    box.textContent = ` ${res.count}명 등록 완료`;
+    await loadRosterTable();
+  }catch(err){
+    box.textContent = ' 오류: '+err.message;
+  }
+}
+
+async function loadRosterTable(){
+  const tbody = document.getElementById('rosterTbody');
+  try{
+    const res = await callApi('getRoster', {});
+    const list = (res.roster||[]).slice().sort((a,b)=> String(a.번호).localeCompare(String(b.번호), undefined, {numeric:true}));
+    tbody.innerHTML = list.length
+      ? list.map(r=>`<tr><td>${r.번호}</td><td>${r.이름}</td><td>${r.반||''}</td></tr>`).join('')
+      : '<tr><td colspan="3" class="empty">등록된 명렬이 없습니다.</td></tr>';
+  }catch(err){
+    tbody.innerHTML = '<tr><td colspan="3" class="empty">불러오기 오류</td></tr>';
+  }
+}
+
+checkConfig();
+initRoster();
+</script>
+</body>
+</html>
